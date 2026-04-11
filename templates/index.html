@@ -2,88 +2,62 @@
 <html>
 <head>
     <title>Return Fraud Detector</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-            padding: 40px;
-        }
 
-        input {
-            margin: 10px;
-            padding: 10px;
-            width: 250px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: #22c55e;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background: #16a34a;
-        }
-
-        .result {
-            margin-top: 20px;
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
 </head>
 
 <body>
 
-    <h1>Return Fraud Detector 🚀</h1>
+    <div class="container">
 
-    <input type="number" id="total_orders" placeholder="Total Orders"><br>
-    <input type="number" id="total_spent" placeholder="Total Spent"><br>
-    <input type="number" id="total_returns" placeholder="Total Returns"><br>
-    <input type="number" step="0.01" id="return_ratio" placeholder="Return Ratio"><br>
-    <input type="number" id="customer_lifetime_days" placeholder="Lifetime Days"><br>
-    <input type="number" id="avg_order_value" placeholder="Avg Order Value"><br>
-    <input type="number" step="0.01" id="purchase_frequency" placeholder="Purchase Frequency"><br>
+        <h1>Return Fraud Detector 🚀</h1>
+        <p class="subtitle">AI-powered fraud risk analysis system</p>
 
-    <br>
-    <button onclick="predict()">Check Fraud</button>
+        <div class="grid">
 
-    <div class="result" id="result"></div>
+            <div class="input-group">
+                <label>Total Orders</label>
+                <input type="number" id="total_orders">
+            </div>
 
-    <script>
-        async function predict() {
-            const data = {
-                total_orders: Number(document.getElementById("total_orders").value),
-                total_spent: Number(document.getElementById("total_spent").value),
-                total_returns: Number(document.getElementById("total_returns").value),
-                return_ratio: Number(document.getElementById("return_ratio").value),
-                customer_lifetime_days: Number(document.getElementById("customer_lifetime_days").value),
-                avg_order_value: Number(document.getElementById("avg_order_value").value),
-                purchase_frequency: Number(document.getElementById("purchase_frequency").value)
-            };
+            <div class="input-group">
+                <label>Total Spent</label>
+                <input type="number" id="total_spent">
+            </div>
 
-            const response = await fetch("/predict", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
+            <div class="input-group">
+                <label>Total Returns</label>
+                <input type="number" id="total_returns">
+            </div>
 
-            const result = await response.json();
+            <div class="input-group">
+                <label>Return Ratio</label>
+                <input type="number" step="0.01" id="return_ratio">
+            </div>
 
-            document.getElementById("result").innerHTML =
-                "Fraud Prediction: " + result.fraud_prediction +
-                "<br>Risk Score: " + result.risk_score;
-        }
-    </script>
+            <div class="input-group">
+                <label>Customer Lifetime</label>
+                <input type="number" id="customer_lifetime_days">
+            </div>
+
+            <div class="input-group">
+                <label>Avg Order Value</label>
+                <input type="number" id="avg_order_value">
+            </div>
+
+            <div class="input-group">
+                <label>Purchase Frequency</label>
+                <input type="number" step="0.01" id="purchase_frequency">
+            </div>
+
+        </div>
+
+        <button onclick="predict()">Analyze Risk</button>
+
+        <div id="result" class="result-box"></div>
+
+    </div>
 
 </body>
 </html>
