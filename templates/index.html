@@ -1,82 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Return Fraud Detector</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Return Fraud Detector</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
-
 <body>
 
-<div class="main">
-
-    <h1>Return Fraud Detector 🚀</h1>
-    <p class="subtitle">Interactive AI Fraud Analysis Dashboard</p>
-
-    <div class="layout">
-
-        <!-- INPUT PANEL -->
-        <div class="form-card">
-
-            <div class="feature" data-id="total_orders">
-                <label>Total Orders</label>
-                <div class="control">
-                    <button onclick="step('total_orders', -1)">-</button>
-                    <span id="total_orders_val">10</span>
-                    <button onclick="step('total_orders', 1)">+</button>
-                </div>
-                <input type="range" min="1" max="100" value="10" oninput="updateVal('total_orders', this.value)">
-            </div>
-
-            <div class="feature" data-id="total_spent">
-                <label>Total Spent</label>
-                <input type="range" min="0" max="10000" value="1000" oninput="updateVal('total_spent', this.value)">
-                <span id="total_spent_val">1000</span>
-            </div>
-
-            <div class="feature" data-id="total_returns">
-                <label>Total Returns</label>
-                <input type="range" min="0" max="50" value="5" oninput="updateVal('total_returns', this.value)">
-                <span id="total_returns_val">5</span>
-            </div>
-
-            <div class="feature" data-id="return_ratio">
-                <label>Return Ratio</label>
-                <input type="range" min="0" max="1" step="0.01" value="0.2" oninput="updateVal('return_ratio', this.value)">
-                <span id="return_ratio_val">0.2</span>
-            </div>
-
-            <div class="feature" data-id="customer_lifetime_days">
-                <label>Lifetime Days</label>
-                <input type="range" min="1" max="365" value="50" oninput="updateVal('customer_lifetime_days', this.value)">
-                <span id="customer_lifetime_days_val">50</span>
-            </div>
-
-            <div class="feature" data-id="avg_order_value">
-                <label>Avg Order Value</label>
-                <input type="range" min="1" max="1000" value="100" oninput="updateVal('avg_order_value', this.value)">
-                <span id="avg_order_value_val">100</span>
-            </div>
-
-            <div class="feature" data-id="purchase_frequency">
-                <label>Purchase Frequency</label>
-                <input type="range" min="0" max="1" step="0.01" value="0.3" oninput="updateVal('purchase_frequency', this.value)">
-                <span id="purchase_frequency_val">0.3</span>
-            </div>
-
-            <button onclick="predict()">Analyze Risk</button>
-
-        </div>
-
-        <!-- RESULT -->
-        <div class="result-card" id="result">
-            <h2>Prediction Result</h2>
-        </div>
-
+  <header class="header">
+    <div class="header-inner">
+      <h1>Return Fraud Detector</h1>
+      <p>AI-powered fraud risk analysis</p>
     </div>
+  </header>
 
-</div>
+  <main class="main">
+    <section class="card form-card">
+      <h2>Customer Input</h2>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Total Orders</label>
+          <input type="number" id="total_orders" placeholder="e.g. 25">
+        </div>
+
+        <div class="field">
+          <label>Total Spent</label>
+          <input type="number" id="total_spent" placeholder="e.g. 5000">
+        </div>
+
+        <div class="field">
+          <label>Total Returns</label>
+          <input type="number" id="total_returns" placeholder="e.g. 5">
+        </div>
+
+        <div class="field">
+          <label>Return Ratio</label>
+          <input type="number" step="0.01" id="return_ratio" placeholder="e.g. 0.2">
+        </div>
+
+        <div class="field">
+          <label>Customer Lifetime (days)</label>
+          <input type="number" id="customer_lifetime_days" placeholder="e.g. 120">
+        </div>
+
+        <div class="field">
+          <label>Avg Order Value</label>
+          <input type="number" id="avg_order_value" placeholder="e.g. 200">
+        </div>
+
+        <div class="field full">
+          <label>Purchase Frequency</label>
+          <input type="number" step="0.01" id="purchase_frequency" placeholder="e.g. 0.3">
+        </div>
+      </div>
+
+      <button class="btn" onclick="predict()">Analyze Risk</button>
+    </section>
+
+    <section class="card result-card" id="result">
+      <h2>Prediction Result</h2>
+      <div class="result-body">
+        <p class="muted">Enter values and click Analyze</p>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>
